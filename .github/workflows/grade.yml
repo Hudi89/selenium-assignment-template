@@ -1,10 +1,6 @@
 name: Calculate Grade
 
-on:
-  push:
-    paths:
-      - 'points.yml'
-
+on: push
 jobs:
   grade:
     runs-on: ubuntu-latest
