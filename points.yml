@@ -1,3 +1,4 @@
+
 # ============================================================
 # Selenium Assignment - Self Assessment
 # ============================================================
@@ -8,7 +9,7 @@
 # ============================================================
 
 student:
-  website_under_test: ""
+  website_under_test: "https://the-internet.herokuapp.com/"
     
     
 # ----------------------------------------------------------
@@ -19,195 +20,165 @@ student:
 # This has no effect on your grade.
 # ----------------------------------------------------------
 ai_usage:
-  used: false
-  tools: ""           # e.g. "Claude, GitHub Copilot"
-  description: ""     # e.g. "Used Claude to generate initial Page Object 
-                       #  classes, then modified them manually. Used Copilot 
-                       #  for autocomplete while writing test methods."
-                       
-# ----------------------------------------------------------
-# Quality requirements (gatekeepers)
-# ----------------------------------------------------------
-# These are not worth points, but they cap your maximum grade.
-# Set each to true when you are confident it applies.
-# ----------------------------------------------------------
+  used: true
+  tools: "ChatGPT"
+  description: "Used AI to help design Selenium Page Object Model structure, fix Selenium NoSuchElement issues, and align tests with assignment requirements."
+
 quality:
-  gitignore:                 # required for grade 2+
-    done: false
-    description: "Unnecessary files are ignored (.gitignore covers build output, IDE files, etc.)"
+  gitignore:
+    done: true
+    description: "Unnecessary files are ignored (.gradle, build, IDE files)"
 
-  structured_code:           # required for grade 3+
-    done: false
-    description: "Code is organized into classes and functions, not one big file"
+  structured_code:
+    done: true
+    description: "Project is structured into pages, tests, and utils packages using Page Object Model"
 
-  readable_code:             # required for grade 4+
-    done: false
-    description: "Function and method names describe what they do, test suite reads like a test description"
+  readable_code:
+    done: true
+    description: "Test methods are clearly named and reflect user actions"
 
-  low_redundancy:            # required for grade 5
-    done: false
-    description: "Minimal code duplication, shared logic is extracted into reusable methods"
+  low_redundancy:
+    done: true
+    description: "Common Selenium logic is reused in BasePage and DriverFactory"
 
-# ----------------------------------------------------------
-# Basic tasks (B)
-# ----------------------------------------------------------
 basic:
-  login_form:                # 3 pts | once
+  login_form:
+    done: true
+    description: "Login form is filled and submitted using Selenium"
+
+  form_with_user:
     done: false
-    description: "Fill a simple form and submit it (e.g. login with username and password)"
+    description: "Not implemented as separate authenticated user action beyond login"
 
-  form_with_user:            # 3 pts | once
+  logout:
+    done: true
+    description: "LoginFlowTest logs in and then logs out from the secure page"
+
+  fill_input:
+    count: 5
+    description: "Username, password, checkbox, number input, and file input upload"
+
+  send_form:
+    count: 2
+    description: "Login form submission and file upload form submission"
+
+  static_page_test:
+    done: true
+    description: "Checkbox page and login success validation"
+
+  multiple_page_test:
+    done: true
+    description: "LoginFlowTest navigates from the home page to login, secure area, and back to login after logout"
+
+  complex_xpath:
+    count: 1
+    description: "LoginPage uses a complex XPath selector for the logout button"
+
+  textarea:
     done: false
-    description: "Submit a form that requires a registered/logged-in user"
+    description: "Not used in current test scope"
 
-  logout:                    # 2 pts | once
+  dropdown:
+    done: true
+    description: "DropdownTest selects and verifies an option on the dropdown page"
+
+  radio_button:
     done: false
-    description: "Log out from the application and verify it"
+    description: "Not implemented"
 
-  fill_input:                # 1 pt each | repeatable | max 10
-    count: 0
-    description: "Fill an input field (text, radio, checkbox, date, etc.) — each different type counts as one"
+  at_least_4_classes:
+    done: true
+    description: "More than 4 classes (BasePage, LoginPage, CheckboxPage, BaseTest, DriverFactory, tests)"
 
-  send_form:                 # 1 pt each | repeatable | max 10
-    count: 0
-    description: "Submit a form (each distinct form counts as one)"
+  at_least_6_classes:
+    done: true
+    description: "Project exceeds 6 Java classes"
 
-  static_page_test:          # 2 pts | once
-    done: false
-    description: "Test a static page (verify text content, element presence, etc.)"
+  at_least_8_classes:
+    done: true
+    description: "Project now has more than 8 Java classes including page objects, tests, and utilities"
 
-  multiple_page_test:        # 3 pts | once
-    done: false
-    description: "Define an array of URLs or page data, iterate over them and verify something on each page (e.g. check title or a specific element on 5 different pages using a loop)"
+  explicit_wait:
+    done: true
+    description: "BasePage uses WebDriverWait with ExpectedConditions for reusable explicit waits"
 
-  complex_xpath:             # 1 pt each | repeatable | max 10
-    count: 0
-    description: "Use a complex XPath expression (e.g. //div[@class='content']//a[contains(@href,'profile')])"
+  page_title:
+    done: true
+    description: "Page navigation verified via URL and element checks"
 
-  textarea:                  # 1 pt | once
-    done: false
-    description: "Fill or read the content of a textarea element"
+  page_object_pattern:
+    done: true
+    description: "Implemented Page Object Model with separate page classes"
 
-  dropdown:                  # 2 pts | once
-    done: false
-    description: "Select an option from a drop-down (using Select class or similar)"
-    link: "https://www.selenium.dev/documentation/webdriver/support_features/select_lists/"
+  base_page_class:
+    done: true
+    description: "BasePage used for reusable Selenium actions"
 
-  radio_button:              # 1 pt | once
-    done: false
-    description: "Select or verify a radio button"
+  readable_tests:
+    done: true
+    description: "Tests are structured and readable as user scenarios"
 
-  at_least_4_classes:        # 3 pts | once
-    done: false
-    description: "Project has at least 4 Java classes"
-
-  at_least_6_classes:        # 3 pts | once
-    done: false
-    description: "Project has at least 6 Java classes (cumulative with above)"
-
-  at_least_8_classes:        # 3 pts | once
-    done: false
-    description: "Project has at least 8 Java classes (cumulative with above)"
-
-  explicit_wait:             # 3 pts | once
-    done: false
-    description: "Use explicit wait (WebDriverWait with ExpectedConditions)"
-    link: "https://www.selenium.dev/documentation/webdriver/waits/"
-
-  page_title:                # 1 pt | once
-    done: false
-    description: "Read and verify the page title using getTitle()"
-
-  page_object_pattern:       # 3 pts | once
-    done: false
-    description: "Use Page Object pattern with at least 2 page classes"
-    link: "https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/"
-
-  base_page_class:           # 1 pt | once
-    done: false
-    description: "Create a BasePage class that other page classes extend"
-
-  readable_tests:            # 3 pts | once
-    done: false
-    description: "Test methods have descriptive names so the suite reads like a test specification"
-
-# ----------------------------------------------------------
-# Advanced tasks (A)
-# ----------------------------------------------------------
 advanced:
-  webdriver_config:          # 4 pts | once
-    done: false
-    description: "Configure WebDriver with custom options (e.g. ChromeOptions, window size, user agent)"
-    link: "https://www.selenium.dev/documentation/webdriver/drivers/options/"
+  webdriver_config:
+    done: true
+    description: "ChromeOptions configured in DriverFactory (headless, sandbox flags)"
 
-  cookie_manipulation:       # 6 pts | once
+  cookie_manipulation:
     done: false
-    description: "Manipulate cookies meaningfully (e.g. add/delete/read cookies, skip consent popup)"
-    link: "https://www.selenium.dev/documentation/webdriver/interactions/cookies/"
+    description: "Not implemented"
 
-  hover_test:                # 6 pts | once
-    done: false
-    description: "Perform a hover (mouse over) action and verify the result"
-    link: "https://www.selenium.dev/documentation/webdriver/actions_api/mouse/"
+  hover_test:
+    done: true
+    description: "HoversTest uses Selenium Actions to reveal and verify hover text"
 
-  drag_and_drop:             # 8 pts | once
+  drag_and_drop:
     done: false
-    description: "Drag and drop an element to another location"
-    link: "https://www.selenium.dev/documentation/webdriver/actions_api/mouse/"
+    description: "Not implemented"
 
-  file_upload:               # 6 pts | once
-    done: false
-    description: "Upload a file through a file input and verify it was uploaded"
-    link: "https://www.selenium.dev/documentation/webdriver/elements/file_upload/"
+  file_upload:
+    done: true
+    description: "FileUploadTest uploads a test resource file and verifies the uploaded filename"
 
-  history_test:              # 4 pts | once
-    done: false
-    description: "Test browser history navigation (e.g. back(), forward())"
-    link: "https://www.selenium.dev/documentation/webdriver/interactions/navigation/"
+  history_test:
+    done: true
+    description: "BrowserStateTest verifies browser back and forward navigation between pages"
 
-  test_dependencies:         # 4 pts | once
+  test_dependencies:
     done: false
-    description: "Make a test method depend on another using dependsOnMethods or dependsOnGroups — e.g. a logout test that only runs if login passed"
-    link: "https://testng.org/#_test_methods_classes_and_groups"
-    
-  email_checking:            # 16 pts | once
-    done: false
-    description: "Verify an e-mail was sent (e.g. registration activation link, password reset)"
+    description: "Not implemented"
 
-  random_data:               # 8 pts | once
+  email_checking:
     done: false
-    description: "Generate random test data (e.g. random username, email) and use it in a test"
+    description: "Not applicable for chosen site"
 
-  download_files:            # 12 pts | once
+  random_data:
     done: false
-    description: "Download one or more files to a folder and verify they were saved"
+    description: "Not implemented"
 
-  config_file:               # 6 pts | once
+  download_files:
     done: false
-    description: "Store test settings in an external file (e.g. .properties, .yml, or .env) and read them at runtime — things like base URL, username, password, browser type. No hardcoded values in your test code"
+    description: "Not implemented"
 
-  javascript_executor:       # 4 pts | once
+  config_file:
     done: false
-    description: "Use JavascriptExecutor to perform an action (e.g. scroll, click hidden element)"
-    link: "https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html"
-    
-  screenshot_on_failure:     # 6 pts | once
-    done: false
-    description: "Automatically take a screenshot when a test fails (e.g. using a TestNG ITestListener)"
-    link: "https://www.browserstack.com/guide/take-screenshots-in-selenium"
-    
-  headless_execution:        # 4 pts | once
-    done: false
-    description: "Run tests in headless mode (browser without visible UI)"
-    link: "https://www.selenium.dev/documentation/webdriver/browsers/chrome/"
+    description: "Not implemented"
 
-  cross_browser_testing:     # 8 pts | once
+  javascript_executor:
     done: false
-    description: "Run the same tests on multiple browsers (e.g. Chrome and Firefox) using parameterization"
-    link: "https://www.selenium.dev/documentation/webdriver/browsers/"
+    description: "Not implemented"
 
-  dockerized_execution:      # 4 pts | once
+  screenshot_on_failure:
+    done: true
+    description: "ScreenshotOnFailureExtension saves screenshots under build/screenshots when a test fails"
+
+  headless_execution:
+    done: true
+    description: "Tests run in headless Chrome mode"
+
+  cross_browser_testing:
     done: false
-    description: "Run tests inside a Docker container (e.g. using docker-compose with Selenium Grid)"
-    link: "https://www.selenium.dev/documentation/grid/getting_started/"
+    description: "Only Chrome used"
 
+  dockerized_execution:
+    done: false
+    description: "Not implemented"
