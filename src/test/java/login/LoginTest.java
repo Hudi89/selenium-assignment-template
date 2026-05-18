@@ -25,6 +25,7 @@ public class LoginTest extends BaseTest {
     public void userLoginWithValidCredentialsTest() {
         LoginPage loginPage = new LoginPage(driver);
 
+        System.out.println("USERNAME FROM SECRET: " + USERNAME);
         loginPage.login(USERNAME, PASSWORD);
 
         Assert.assertTrue(driver.getCurrentUrl().contains("home"));
@@ -40,7 +41,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void userCannotLoginWithInvalidPasswordTest() {
+    public void userLoginWithInvalidPasswordTest() {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.login(USERNAME, RandomDataGenerator.randomPassword());
