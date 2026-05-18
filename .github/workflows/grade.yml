@@ -4,6 +4,10 @@ on: push
 jobs:
   grade:
     runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        options: --shm-size=2g
     container:
       image: gradle:8.7-jdk17
     steps:
