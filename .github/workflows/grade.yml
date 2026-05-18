@@ -9,9 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Selenium tests
-        run: |
-          chmod +x gradlew
-          ./gradlew test
+        run: gradle test
         env:
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
