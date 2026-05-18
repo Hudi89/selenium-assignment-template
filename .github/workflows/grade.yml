@@ -2,7 +2,7 @@ name: Calculate Grade
 
 on: push
 jobs:
-  grade:
+  test:
     runs-on: ubuntu-latest
     services:
       selenium:
@@ -12,19 +12,31 @@ jobs:
       image: gradle:8.0.2-jdk17
     steps:
       - uses: actions/checkout@v4
-
       - name: Wait for Selenium Grid
         run: |
           timeout 60 bash -c 'until curl -sSf http://selenium:4444/wd/hub/status 2>/dev/null; do sleep 2; done'
-
       - name: Run Selenium tests
         run: gradle test
         env:
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: build/reports/tests/test
 
-      - name: Install Python dependencies
-        run: pip install pyyaml
-
-      - name: Calculate grade
-        run: python .github/scripts/calculate_grade.py points.yml
+  grade:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.12-slim
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports
+          path: build/reports/tests/test
+      - run: pip install pyyaml
+      - run: python .github/scripts/calculate_grade.py points.yml
