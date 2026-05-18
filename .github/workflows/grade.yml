@@ -5,8 +5,17 @@ jobs:
   grade:
     runs-on: ubuntu-latest
     container:
-      image: python:3.12-slim
+      image: maven:3.9.6-eclipse-temurin-17
     steps:
       - uses: actions/checkout@v4
-      - run: pip install pyyaml
-      - run: python .github/scripts/calculate_grade.py points.yml
+      - name: Run Selenium tests
+        run: mvn test
+        env:
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      - name: Calculate grade
+        run: python .github/scripts/calculate_grade.py points.yml
