@@ -13,7 +13,7 @@ import java.net.URL;
 public class BaseTest {
 
     protected WebDriver driver;
-    private static final String BASE_URL = ConfigReader.get("base.url");
+    protected static final String BASE_URL = ConfigReader.get("base.url");
 
     @Before
     public void setup() throws MalformedURLException {
