@@ -12,6 +12,12 @@ import static utils.EnvConfig.USERNAME;
 
 public class MainTest extends BaseTest {
 
+    private static final List<String> pages = List.of(
+            "https://academy.codifylab.com/lms/home/",
+            "https://academy.codifylab.com/lms/mentor/notifications/",
+            "https://academy.codifylab.com/lms/common/user/settings/"
+    );
+
     @Test
     public void coursesNotEmptyTest() {
         LoginPage loginPage = new LoginPage(driver);
@@ -34,6 +40,19 @@ public class MainTest extends BaseTest {
         mainPage.logout();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
+    }
+
+    @Test
+    public void multiplePagesHaveCorrectTitlesTest() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.login(USERNAME, PASSWORD);
+
+
+        for (String page : pages) {
+            driver.get(page);
+            Assert.assertFalse(driver.getTitle().isEmpty());
+        }
     }
 
 }

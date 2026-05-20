@@ -3,6 +3,7 @@ package login;
 import base.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.Cookie;
 import utils.RandomDataGenerator;
 
 import static utils.EnvConfig.PASSWORD;
@@ -35,6 +36,14 @@ public class LoginTest extends BaseTest {
         loginPage.login(USERNAME, RandomDataGenerator.randomPassword());
 
         Assert.assertFalse(loginPage.getErrorMessage().isEmpty());
+    }
+
+    @Test
+    public void cookieTest() {
+        driver.manage().addCookie(new Cookie("test", "123"));
+        Cookie cookie = driver.manage().getCookieNamed("test");
+
+        Assert.assertEquals("123", cookie.getValue());
     }
 
 }
